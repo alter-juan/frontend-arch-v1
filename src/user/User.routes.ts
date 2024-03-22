@@ -10,7 +10,12 @@ const routes: RouteRecordRaw = {
         path: 'dashboard',
         name: 'Dashboard',
         component: () => import('./views/dashboard/DashboardView.vue'),
-      },
+      },{
+        path: ':id',
+        name: 'UserDetail',
+        component: () => import('./views/user-detail/UserDetailView.vue'),
+        props: true,
+      }
     ],
   };
   

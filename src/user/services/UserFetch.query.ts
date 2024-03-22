@@ -1,7 +1,9 @@
 import { FetchError } from "../../chore/errors/FetchError";
+import { InvalidError } from "../../chore/errors/InvalidError";
 import { UnauthorizedError } from "../../chore/errors/UnauthorizedError";
 import { UserDto } from "../models/dto";
 import { User } from "../models/entity";
+import { ensureUserIsValid } from "../models/entity/User.entity";
 import { UserAuthorizer } from "./User.authorizer";
 import { UserQueryRepository } from "./UserQuery.repository";
 
@@ -32,5 +34,19 @@ export class UserFetchService implements UserQueryRepository {
         const users = usersDto.map(UserTranslate.toEntity);
 
         return users
+    }
+
+    async getUser(id: string) {
+        if (!this.authorizer.canReadDetail()) throw new UnauthorizedError('Unauthorized to read users');
+
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+        if (!response.ok) throw new FetchError('Failed to fetch user');
+
+        const userDto: UserDto = await response.json();
+        const user = UserTranslate.toEntity(userDto);
+
+        if(!ensureUserIsValid(user)) new InvalidError('Invalid user data');
+
+        return user
     }
 }

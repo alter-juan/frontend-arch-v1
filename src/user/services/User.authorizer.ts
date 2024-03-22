@@ -4,4 +4,8 @@ export class UserAuthorizer {
     canRead() {
         return this.roles.includes('admin');
     }
+
+    canReadDetail() {
+        return this.roles.includes('admin');
+    }
 }

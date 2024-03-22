@@ -1,16 +1,15 @@
-import { inject, onMounted, readonly, ref } from "vue";
-import type { UserQueryRepository } from "../../services/UserQuery.repository";
+import { onMounted, readonly, ref } from "vue";
 import { User } from "../../models/entity";
+import { useUserInjection } from "../../dependencies/useUserInjection";
 
 export function useDashboardController() {
-  const { queryService } = inject("services") as {
-    queryService: UserQueryRepository;
-  };
+  const { userQuery } = useUserInjection();
+  
   const users = ref<User[]>([]);
   const isLoading = ref(false);
 
   const getUsers = async () => {
-    return await queryService.getUsers();
+    return await userQuery.getUsers();
   };
 
   onMounted(async () => {
