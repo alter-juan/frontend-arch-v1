@@ -3,7 +3,7 @@ import {
   ensureIsValidEmail,
   ensureUserIsValid,
   User
-} from './User.entity'
+} from '../../models/entity/User.entity'
 
 
 describe('[Entity] Given User entity and validators', () => {

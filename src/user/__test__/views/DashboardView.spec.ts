@@ -1,8 +1,8 @@
 import { render } from "@testing-library/vue";
 import { createRouter, createWebHistory } from "vue-router";
-import DashboardView from "../dashboard/DashboardView.vue";
+import DashboardView from "../../views/dashboard/DashboardView.vue";
 
-vi.mock('../../services/UserFetch.query');
+vi.mock('../services/UserFetch.query');
 
 describe("[View] Given DashboardView", () => {
 
