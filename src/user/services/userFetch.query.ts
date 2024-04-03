@@ -1,11 +1,11 @@
-import { FetchError } from "../../chore/errors/FetchError";
-import { InvalidError } from "../../chore/errors/InvalidError";
-import { UnauthorizedError } from "../../chore/errors/UnauthorizedError";
+import { FetchError } from "../../core/errors/FetchError";
+import { InvalidError } from "../../core/errors/InvalidError";
+import { UnauthorizedError } from "../../core/errors/UnauthorizedError";
 import { UserDto } from "../models/dto";
 import { User } from "../models/entity";
-import { ensureUserIsValid } from "../models/entity/User.entity";
-import { UserAuthorizer } from "./User.authorizer";
-import { UserQueryRepository } from "./UserQuery.repository";
+import { ensureUserIsValid } from "../models/entity/user.entity";
+import { UserAuthorizer } from "./user.authorizer";
+import { UserQueryRepository } from "./user.repository";
 
 
 const UserTranslate = {
@@ -45,8 +45,8 @@ export class UserFetchService implements UserQueryRepository {
         const userDto: UserDto = await response.json();
         const user = UserTranslate.toEntity(userDto);
 
-        if(!ensureUserIsValid(user)) new InvalidError('Invalid user data');
+        if (!ensureUserIsValid(user)) throw new InvalidError('Invalid user data');
 
-        return user
+        return user;
     }
 }

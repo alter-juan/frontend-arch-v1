@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import UserTitle from "../../../components/UserTitle.vue";
-import type { User } from "../../../models/entity/User.entity";
+import type { User } from "../../../models/entity/user.entity";
 
 defineProps<{
     users: Readonly<User[]>;
