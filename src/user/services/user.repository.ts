@@ -1,4 +1,4 @@
-import { User } from "../models/entity/User.entity";
+import { User } from "../models/entity/user.entity";
 
 export interface UserQueryRepository {
     getUsers(): Promise<User[]>;
