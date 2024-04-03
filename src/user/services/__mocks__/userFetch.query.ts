@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker"
-import { UserQueryRepository } from "../UserQuery.repository"
+import { UserQueryRepository } from "../user.repository"
 import { User } from "../../models/entity";
 
 export class UserFetchService implements UserQueryRepository {

@@ -1,10 +1,16 @@
-import { createWebHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter, RouteRecordRaw } from "vue-router";
+import UserRoutes  from "./user/user.routes";
 
-const routes = [
+const routes : RouteRecordRaw[] = [
   {
     path: "",
     redirect: { name: "DashboardLayout" },
   },
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import("./core/views/NotFoundView.vue"),
+  },
+  UserRoutes, 
 ];
 
 export const router = createRouter({

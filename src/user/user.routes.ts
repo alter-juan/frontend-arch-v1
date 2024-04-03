@@ -1,4 +1,4 @@
-import { RouteRecordRaw, Router } from 'vue-router';
+import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw = {
     path: '/user',
@@ -18,7 +18,6 @@ const routes: RouteRecordRaw = {
       }
     ],
   };
-  
-  export const UserRouter = (router: Router) => {
-    router.addRoute('User', routes);
-  };
+
+
+export default routes;
