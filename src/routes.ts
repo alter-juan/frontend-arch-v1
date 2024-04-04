@@ -1,5 +1,6 @@
 import { createWebHistory, createRouter, RouteRecordRaw } from "vue-router";
 import UserRoutes  from "./user/user.routes";
+import AuthRoutes  from "./auth/auth.routes";
 
 const routes : RouteRecordRaw[] = [
   {
@@ -11,6 +12,7 @@ const routes : RouteRecordRaw[] = [
     component: () => import("./core/views/NotFoundView.vue"),
   },
   UserRoutes, 
+  AuthRoutes
 ];
 
 export const router = createRouter({
