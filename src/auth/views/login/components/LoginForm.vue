@@ -41,10 +41,11 @@ form {
   flex-direction: column;
   gap: 2rem;
   padding: 3rem;
-  border: 1px solid #82d39d;
   border-radius: 0.5em;
   width: 300px;
   justify-content: space-between;
+  background-color: #242424;
+  filter: drop-shadow(0 0 9em #42b883aa);
 }
 
 .form-container {
