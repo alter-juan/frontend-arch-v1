@@ -19,9 +19,14 @@ export class AuthRestCommand implements AuthCommand {
     async login(payload: LoginPayload): Promise<void> {
         try {
             const dto = LoginTranslator.toDto(payload);
-            await Client.post("auth/login", dto);
+            const { data } = await Client.post("auth/login", dto);
+            sessionStorage.setItem("token", data.token);
         } catch (error) {
             throw new FetchError("Login failed. Please try again");
         }
+    }
+
+    async logout(): Promise<void> {
+        sessionStorage.removeItem("token");
     }
 }

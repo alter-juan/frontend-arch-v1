@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/vue";
+import { createTestingPinia } from '@pinia/testing'
 import LoginView from "../../../views/login/LoginView.vue";
 import userEvent from '@testing-library/user-event';
 import { faker } from "@faker-js/faker";
@@ -20,7 +21,7 @@ describe('Given a view to login', () =>{
     describe('When user is on login page', () => {
         it('Then user must see a title', () => {
             // Arrange
-            render(LoginView);
+            render(LoginView, { global: { plugins: [createTestingPinia()]}});
             
             // Act
             const title = screen.getByRole("heading", {
@@ -54,7 +55,7 @@ describe('Given a view to login', () =>{
         it('Then user must see a message that login was successful', async () => {
             // Arrange
             const user = userEvent.setup();
-            render(LoginView);
+            render(LoginView, { global: { plugins: [createTestingPinia()]}});
 
             const emailInput = screen.getByLabelText(/Email/i);
             const passwordInput = screen.getByLabelText(/Password/i);
