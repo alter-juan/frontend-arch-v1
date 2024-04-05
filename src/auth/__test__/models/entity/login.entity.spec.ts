@@ -1,9 +1,10 @@
 import { faker } from "@faker-js/faker";
-import {
-  LoginPayload,
-  ensureLoginPayloadIsValid,
-} from "../../../models/entity";
+
 import { EmailError } from "../../../../common/errors";
+import {
+  ensureLoginPayloadIsValid,
+  LoginPayload,
+} from "../../../models/entity";
 
 describe("Given a login entity and ensurer to entity", () => {
   it("When email is undefined, Then the ensurer must triggered and email error", () => {

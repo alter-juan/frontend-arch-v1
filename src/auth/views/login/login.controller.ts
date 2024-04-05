@@ -1,6 +1,7 @@
-import { LoginPayload, ensureLoginPayloadIsValid } from "../../models/entity"
-import { authCommands } from "../../dependencies/auth.injection";
 import { useRouter } from "vue-router";
+
+import { authCommands } from "../../dependencies/auth.injection";
+import { ensureLoginPayloadIsValid,LoginPayload } from "../../models/entity"
 import { useAuthStore } from "../../store/auth.store";
 
 export function useLoginController() {

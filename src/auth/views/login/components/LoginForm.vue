@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue'
-import { LoginPayload, isEmailValid, isPasswordValid, isUsernameValid } from "../../../models/entity";
+
+import { isEmailValid, isPasswordValid, isUsernameValid,LoginPayload } from "../../../models/entity";
 
 const emit = defineEmits<{ signIn: [payload: LoginPayload] }>()
 
@@ -19,20 +20,40 @@ const hasError = computed(() => !isEmailValid(formData.email) || !isPasswordVali
     <div class="form-container">
       <div class="form-control">
         <label for="email">Email</label>
-        <input id="email" type="email" placeholder="example@dummy.com" v-model="formData.email" />
+        <input
+          id="email"
+          v-model="formData.email"
+          type="email"
+          placeholder="example@dummy.com"
+        >
       </div>
 
       <div class="form-control">
         <label for="username">Username</label>
-        <input id="username" type="text" placeholder="max perez" v-model="formData.username" />
+        <input
+          id="username"
+          v-model="formData.username"
+          type="text"
+          placeholder="max perez"
+        >
       </div>
 
       <div class="form-control">
         <label for="password">Password</label>
-        <input id="password"type="password" placeholder="************" v-model="formData.password" />
+        <input
+          id="password"
+          v-model="formData.password"
+          type="password"
+          placeholder="************"
+        >
       </div>
     </div>
-    <button type="submit" :disabled="hasError">Sign In</button>
+    <button
+      type="submit"
+      :disabled="hasError"
+    >
+      Sign In
+    </button>
   </form>
 </template>
 <style scoped>

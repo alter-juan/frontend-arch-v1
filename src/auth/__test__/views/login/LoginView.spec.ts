@@ -1,9 +1,10 @@
-import { render, screen } from "@testing-library/vue";
-import { createTestingPinia } from '@pinia/testing'
-import LoginView from "../../../views/login/LoginView.vue";
-import userEvent from '@testing-library/user-event';
-import { faker } from "@faker-js/faker";
 import { useRouter } from "vue-router";
+import { faker } from "@faker-js/faker";
+import { createTestingPinia } from '@pinia/testing'
+import userEvent from '@testing-library/user-event';
+import { render, screen } from "@testing-library/vue";
+
+import LoginView from "../../../views/login/LoginView.vue";
 
 vi.mock('vue-router', () => ({
     useRouter: vi.fn().mockReturnValue({

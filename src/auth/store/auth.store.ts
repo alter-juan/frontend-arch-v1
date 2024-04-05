@@ -1,8 +1,9 @@
-import { defineStore } from "pinia";
-import { authCommands } from "../dependencies/auth.injection";
-import { useRouter } from "vue-router";
-import { AuthRoutes } from "..";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { defineStore } from "pinia";
+
+import { authCommands } from "../dependencies/auth.injection";
+import { AuthRoutes } from "..";
 
 export const useAuthStore = defineStore('auth',() => {
     const isAuthenticated = ref(false)
