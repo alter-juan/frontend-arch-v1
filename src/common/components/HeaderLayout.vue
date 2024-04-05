@@ -5,11 +5,21 @@ const authStore = useAuthStore();
 
 </script>
 <template>
-       <header>
-            <h1>Vue template</h1>
-            <router-link :to="{ name: AuthRoutes.LOGIN }">Sign In</router-link>
-            <button @click="authStore.logout" >Sign out</button>
-        </header>
+  <header>
+    <h1>Vue template</h1>
+    <router-link
+      v-if="!authStore.isAuthenticated"
+      :to="{ name: AuthRoutes.LOGIN }"
+    >
+      Sign In
+    </router-link>
+    <button
+      v-else
+      @click="authStore.logout"
+    >
+      Sign out
+    </button>
+  </header>
 </template>
 <style scoped>
     header {
