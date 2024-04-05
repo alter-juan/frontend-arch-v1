@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "test:unit": "vitest --environment jsdom --root src/",
     "test": "vitest --environment jsdom --run --root src/",
+    "lint": "eslint src --ext .ts,.js,.vue --fix",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -19,7 +20,12 @@
     "@faker-js/faker": "^8.4.1",
     "@testing-library/user-event": "^14.5.2",
     "@testing-library/vue": "^8.0.3",
+    "@typescript-eslint/parser": "^7.5.0",
     "@vitejs/plugin-vue": "^5.0.4",
+    "eslint": "^8.57.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-simple-import-sort": "^12.0.0",
+    "eslint-plugin-vue": "^9.24.0",
     "husky": "^9.0.11",
     "jsdom": "^24.0.0",
     "typescript": "^5.2.2",
