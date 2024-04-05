@@ -1,6 +1,6 @@
 import {
-  ensureIsValidUsername,
   ensureIsValidEmail,
+  ensureIsValidUsername,
   ensureUserIsValid,
   User
 } from '../../models/entity/user.entity'

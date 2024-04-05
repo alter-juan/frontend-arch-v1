@@ -1,6 +1,7 @@
 import { onMounted, readonly, ref } from "vue";
-import { User } from "../../models/entity";
+
 import { useUserInjection } from "../../dependencies/useUserInjection";
+import { User } from "../../models/entity";
 
 export function useDashboardController() {
   const { userQuery } = useUserInjection();
