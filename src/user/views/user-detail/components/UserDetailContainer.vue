@@ -6,8 +6,11 @@ defineProps<{
 }>();
 </script>
 <template>
-    <div v-if="!user" role="alert">
-        User not found
-    </div>
-    <pre v-else>{{ user }}</pre>
+  <div
+    v-if="!user"
+    role="alert"
+  >
+    User not found
+  </div>
+  <pre v-else>{{ user }}</pre>
 </template>

@@ -1,6 +1,6 @@
 import { UserAuthorizer } from "../services/user.authorizer";
-import { UserFetchService } from "../services/userFetch.query";
 import { UserQueryRepository } from "../services/user.repository";
+import { UserFetchService } from "../services/userFetch.query";
 import { Service } from "../types";
 
 export function useUserInjection(): Service {

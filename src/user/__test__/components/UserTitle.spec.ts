@@ -1,4 +1,5 @@
 import { render } from '@testing-library/vue';
+
 import UserTitle from '../../components/UserTitle.vue';
 
 describe('[Component] Given UserTitle model', () => {
