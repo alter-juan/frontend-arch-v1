@@ -1,29 +1,17 @@
-interface AddressDto {
-  street: string;
-  suite: string;
-  city: string;
-  zipcode: string;
-  geo: GeoDto;
-}
-
-interface GeoDto {
-  lat: string;
-  lng: string;
-}
-
-interface CompanyDto {
-  name: string;
-  catchPhrase: string;
-  bs: string;
-}
-
 export interface UserDto {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: AddressDto;
-  phone: string;
-  website: string;
-  company: CompanyDto;
+  id: number
+  firstName: string
+  lastName: string
+  maidenName: string
+  age: number
+  gender: string
+  email: string
+  phone: string
+  username: string
+  birthDate: string
+  image: string
+  bloodGroup: string
+  height: number
+  weight: number
+  eyeColor: string
 }

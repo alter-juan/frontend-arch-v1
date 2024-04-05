@@ -25,6 +25,13 @@ ul {
     list-style-type: none;
     padding: 0;
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
+
+    li {
+        button {
+            width: 100%;
+        }
+    }
 }
 </style>
