@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter, RouteRecordRaw } from "vue-router";
 import UserRoutes  from "./user/user.routes";
-import AuthRoutes  from "./auth/auth.routes";
+import AuthRoutes, { AuthRoutes as AuthRouteAlias }  from "./auth/auth.routes";
+import { useAuthStore } from "./auth/store/auth.store";
 
 const routes : RouteRecordRaw[] = [
   {
@@ -19,3 +20,17 @@ export const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+router.beforeEach((to, _, next) => {
+  const authStore = useAuthStore();
+  const token = sessionStorage.getItem("token");
+
+  if (token) {
+    authStore.setAuthenticated(true);
+  }
+
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) next({ name: AuthRouteAlias.LOGIN })
+  else if (to.name === AuthRouteAlias.LOGIN && authStore.isAuthenticated) next("/")
+  else next()
+})
+

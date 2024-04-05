@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { AuthRoutes } from "../../auth";
+import { AuthRoutes, useAuthStore } from "../../auth";
+
+const authStore = useAuthStore();
+
 </script>
 <template>
        <header>
             <h1>Vue template</h1>
             <router-link :to="{ name: AuthRoutes.LOGIN }">Sign In</router-link>
+            <button @click="authStore.logout" >Sign out</button>
         </header>
 </template>
 <style scoped>
