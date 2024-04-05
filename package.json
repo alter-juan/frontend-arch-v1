@@ -3,14 +3,18 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "lint-staged": {
+    "*.{ts,vue}": "eslint --max-warnings 1"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "test:unit": "vitest --environment jsdom --root src/",
     "test": "vitest --environment jsdom --run --root src/",
-    "lint": "eslint src --ext .ts,.js,.vue --fix",
-    "prepare": "husky install"
+    "lint": "eslint src --ext .ts,.vue --fix",
+    "prepare": "husky",
+    "lint:staged": "lint-staged"
   },
   "dependencies": {
     "vue": "^3.4.21",
@@ -28,6 +32,7 @@
     "eslint-plugin-vue": "^9.24.0",
     "husky": "^9.0.11",
     "jsdom": "^24.0.0",
+    "lint-staged": "^15.2.2",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vitest": "^1.4.0",
