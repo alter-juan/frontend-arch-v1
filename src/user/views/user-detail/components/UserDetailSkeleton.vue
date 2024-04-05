@@ -1,15 +1,15 @@
 <template>
-    <div class="profile-container">
-      <div class="profile-pic skeleton-loader">
-        <!-- Placeholder para la imagen de perfil -->
-      </div>
-      <div class="profile-info">
-        <div class="name skeleton-loader"></div>
-        <div class="email skeleton-loader"></div>
-        <div class="bio skeleton-loader"></div>
-      </div>
+  <div class="profile-container">
+    <div class="profile-pic skeleton-loader">
+      <!-- Placeholder para la imagen de perfil -->
     </div>
-  </template>
+    <div class="profile-info">
+      <div class="name skeleton-loader" />
+      <div class="email skeleton-loader" />
+      <div class="bio skeleton-loader" />
+    </div>
+  </div>
+</template>
   
   <style scoped>
   .profile-container {

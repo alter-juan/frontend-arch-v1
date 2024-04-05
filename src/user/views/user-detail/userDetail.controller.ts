@@ -1,6 +1,7 @@
 import { MaybeRef, onMounted, readonly, ref, unref } from "vue";
-import { User } from "../../models/entity";
+
 import { useUserInjection } from "../../dependencies/useUserInjection";
+import { User } from "../../models/entity";
 
 export function useUserDetailController(id: MaybeRef<string>) {
     const { userQuery } = useUserInjection();

@@ -1,7 +1,8 @@
-import { createWebHistory, createRouter, RouteRecordRaw } from "vue-router";
-import UserRoutes  from "./user/user.routes";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+
 import AuthRoutes, { AuthRoutes as AuthRouteAlias }  from "./auth/auth.routes";
 import { useAuthStore } from "./auth/store/auth.store";
+import UserRoutes  from "./user/user.routes";
 
 const routes : RouteRecordRaw[] = [
   {
