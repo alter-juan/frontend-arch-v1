@@ -1,4 +1,5 @@
 import vue from "@vitejs/plugin-vue";
+import { fileURLToPath, URL } from "node:url";
 import checker from "vite-plugin-checker";
 import { defineConfig } from "vitest/config";
 
@@ -11,6 +12,11 @@ export default defineConfig({
       vueTsc: true,
     }),
   ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    }
+  },
   test: {
     globals: true,
   },
