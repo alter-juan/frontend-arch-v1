@@ -1,28 +1,14 @@
-import { ref } from "vue";
-import { useRouter } from "vue-router";
 import { defineStore } from "pinia";
 
-import { authCommands } from "../dependencies/auth.injection";
-import { AuthRoutes } from "..";
+import { useAuthInjection } from "../dependencies/auth.injection";
 
-export const useAuthStore = defineStore('auth',() => {
-    const isAuthenticated = ref(false)
-    const router = useRouter();
-    const { logout:signOut } = authCommands;
-    
-    const setAuthenticated = (value: boolean) => {
-        isAuthenticated.value = value;
-    }
+export const useAuthStore = defineStore("auth", () => {
+  const { auth0Client, auth0Command } = useAuthInjection();
 
-    const logout = () => {
-        signOut();
-        isAuthenticated.value = false;
-        router.push({ name: AuthRoutes.LOGIN });
-    }
-
-    return {
-        isAuthenticated,
-        setAuthenticated,
-        logout,
-    }
-})
+  return {
+    isAuthenticated: auth0Client.isAuthenticated,
+    isAuthenticationLoading: auth0Client.isLoading,
+    login: auth0Command.login.bind(auth0Command),
+    logout: auth0Command.logout.bind(auth0Command),
+  };
+});

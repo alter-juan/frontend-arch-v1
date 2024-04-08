@@ -1,19 +1,15 @@
 import { RouteRecordRaw } from "vue-router";
 
-export enum AuthRoutes {
-    LOGIN = "LoginPage",
-}
+const LoginCallback = () => import("./views/login-callback/LoginCallback.vue");
 
 const router: RouteRecordRaw = {
-    path: "/auth",
-    component: () => import("./AuthMain.vue"),
-    children: [
-        {
-        path: "sign-in",
-        name: AuthRoutes.LOGIN,
-        component: () => import("./views/login/LoginView.vue"),
-        },
-    ],
- };
+  path: "/auth",
+  children: [
+    {
+        path: "callback",
+        component: LoginCallback,
+    }
+  ]
+};
 
- export default router;
+export default router;
