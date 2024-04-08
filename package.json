@@ -17,6 +17,7 @@
     "lint:staged": "lint-staged"
   },
   "dependencies": {
+    "@auth0/auth0-vue": "^2.3.3",
     "axios": "^1.6.8",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
