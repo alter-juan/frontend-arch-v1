@@ -5,6 +5,7 @@ const routes: RouteRecordRaw = {
     name: 'DashboardLayout',
     component: () => import('./UserMain.vue'),
     redirect: { name: 'Dashboard' },
+    meta: { requiresAuth: true },
     children: [
       {
         path: 'dashboard',
