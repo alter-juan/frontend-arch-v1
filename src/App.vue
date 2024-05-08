@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HeaderLayout from './common/components/HeaderLayout.vue'
+import HeaderLayout from "./common/components/HeaderLayout.vue";
 </script>
 <template>
   <div class="main-container">
@@ -47,5 +47,11 @@ import HeaderLayout from './common/components/HeaderLayout.vue'
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+.main-container > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
 }
 </style>

@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
-import AuthRoutes, { AuthRoutes as AuthRouteAlias }  from "./auth/auth.routes";
+import AuthRoutes, { AuthRoutes as AuthRouteAlias } from "./auth/auth.routes";
 import { useAuthStore } from "./auth/store/auth.store";
-import UserRoutes  from "./user/user.routes";
+import SurveysRoutes from "./surveys/surveys.routes";
+import UserRoutes from "./user/user.routes";
 
-const routes : RouteRecordRaw[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: "",
     redirect: { name: "DashboardLayout" },
@@ -13,8 +14,9 @@ const routes : RouteRecordRaw[] = [
     path: "/:pathMatch(.*)*",
     component: () => import("./core/views/NotFoundView.vue"),
   },
-  UserRoutes, 
-  AuthRoutes
+  UserRoutes,
+  AuthRoutes,
+  SurveysRoutes,
 ];
 
 export const router = createRouter({
@@ -30,8 +32,9 @@ router.beforeEach((to, _, next) => {
     authStore.setAuthenticated(true);
   }
 
-  if (to.meta.requiresAuth && !authStore.isAuthenticated) next({ name: AuthRouteAlias.LOGIN })
-  else if (to.name === AuthRouteAlias.LOGIN && authStore.isAuthenticated) next("/")
-  else next()
-})
-
+  if (to.meta.requiresAuth && !authStore.isAuthenticated)
+    next({ name: AuthRouteAlias.LOGIN });
+  else if (to.name === AuthRouteAlias.LOGIN && authStore.isAuthenticated)
+    next("/");
+  else next();
+});
