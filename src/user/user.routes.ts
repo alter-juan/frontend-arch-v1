@@ -1,19 +1,25 @@
 import { RouteRecordRaw } from 'vue-router';
 
+export enum UserRoutes {
+  DASHBOARD = 'Dashboard',
+  DASHBOARD_LAYOUT = 'DashboardLayout',
+  USER_DETAIL = 'UserDetail',
+}
+
 const routes: RouteRecordRaw = {
     path: '/user',
-    name: 'DashboardLayout',
+    name: UserRoutes.DASHBOARD_LAYOUT,
     component: () => import('./UserMain.vue'),
-    redirect: { name: 'Dashboard' },
+    redirect: { name: UserRoutes.DASHBOARD },
     meta: { requiresAuth: true },
     children: [
       {
         path: 'dashboard',
-        name: 'Dashboard',
+        name: UserRoutes.DASHBOARD,
         component: () => import('./views/dashboard/DashboardView.vue'),
       },{
         path: ':id',
-        name: 'UserDetail',
+        name: UserRoutes.USER_DETAIL,
         component: () => import('./views/user-detail/UserDetailView.vue'),
         props: true,
       }

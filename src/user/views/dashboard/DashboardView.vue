@@ -3,7 +3,7 @@ import { useDashboardController } from "./dashboard.controller";
 
 import DashboardContainer from "./components/DashboardContainer.vue";
 
-const { users, isLoading } = useDashboardController();
+const { user, isLoading } = useDashboardController();
 
 </script>
 <template>
@@ -11,7 +11,7 @@ const { users, isLoading } = useDashboardController();
     Loading...
   </div>
   <DashboardContainer
-    v-else
-    :users="users"
+    v-else-if="user"
+    :user="user"
   />
 </template>
