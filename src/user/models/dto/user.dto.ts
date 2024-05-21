@@ -1,5 +1,5 @@
 export interface UserDto {
-  id: number
+  id: string
   firstName: string
   lastName: string
   maidenName: string
@@ -14,4 +14,11 @@ export interface UserDto {
   height: number
   weight: number
   eyeColor: string
+}
+
+export interface UserDtoFromSocialMedia {
+  id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
 }

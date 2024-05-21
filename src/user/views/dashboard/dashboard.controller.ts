@@ -7,16 +7,23 @@ export function useDashboardController() {
   const { userQuery } = useUserInjection();
   
   const users = ref<User[]>([]);
+  const user = ref<Partial<User>>();
   const isLoading = ref(false);
 
   const getUsers = async () => {
     return await userQuery.getUsers();
   };
 
+  const getUser = async () => {
+    const userIdStorage = sessionStorage.getItem('userId');
+     if (!userIdStorage) throw new Error('User not found');    
+    return await userQuery.getUserSocialMedia(userIdStorage);
+  };
+
   onMounted(async () => {
     try {
       isLoading.value = true;
-      users.value = await getUsers();
+      user.value = await getUser();
     } finally {
       isLoading.value = false;
     }
@@ -24,6 +31,7 @@ export function useDashboardController() {
 
   return {
     users: readonly(users),
+    user,
     isLoading: readonly(isLoading),
   };
 }

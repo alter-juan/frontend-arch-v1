@@ -3,13 +3,14 @@ import { FetchError } from "../../core/errors/FetchError";
 import { InvalidError } from "../../core/errors/InvalidError";
 import { UnauthorizedError } from "../../core/errors/UnauthorizedError";
 import { UserDto } from "../models/dto";
+import type { UserDtoFromSocialMedia } from "../models/dto/user.dto";
 import { User } from "../models/entity";
 import { ensureUserIsValid } from "../models/entity/user.entity";
 import { UserAuthorizer } from "./user.authorizer";
 import { UserQueryRepository } from "./user.repository";
 
 
-const UserTranslate = {
+export const UserTranslate = {
     toEntity(dto: UserDto): User {
         return {
             id: dto.id,
@@ -19,8 +20,14 @@ const UserTranslate = {
             phone: dto.phone,
             website: dto.bloodGroup
         };
-    }
-
+    },
+    toEntityFromSocialMedia(dto: UserDtoFromSocialMedia): Partial<User> {
+        return {
+          id: dto?.id,
+          email: dto?.email,
+          name: `${dto?.first_name || ''} ${dto?.last_name || ''}`,
+        };
+    },
 }
 
 export class UserFetchService implements UserQueryRepository {
@@ -50,4 +57,14 @@ export class UserFetchService implements UserQueryRepository {
 
         return user;
     }
+
+    async getUserSocialMedia(userId: string): Promise<Partial<User>> {
+        const response = await client.get(`/user/${userId}/`);
+        const userSocialMedia = response?.data;
+    
+        if (!userSocialMedia) throw new Error('Not found user social media');
+        const user = UserTranslate.toEntityFromSocialMedia(userSocialMedia);
+        return user;
+      }
 }
+

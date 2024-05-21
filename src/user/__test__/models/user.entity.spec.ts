@@ -3,7 +3,7 @@ import {
   ensureIsValidUsername,
   ensureUserIsValid,
   User
-} from '../../models/entity/user.entity'
+} from '../../models/entity/user.entity';
 
 
 describe('[Entity] Given User entity and validators', () => {
@@ -38,7 +38,7 @@ describe('[Entity] Given User entity and validators', () => {
 
   describe('When user is valid ensureUserIsValid returns true', () => {
     const userValid = {
-      id: 1,
+      id: "1",
       name: 'Leanne Graham',
       username: 'Bret',
       email: 'alternova@yopmail.com',
@@ -52,7 +52,7 @@ describe('[Entity] Given User entity and validators', () => {
 
   describe('When user is invalid ensureUserIsValid returns false', () => {
     const userInvalid = {
-      id: 1,
+      id: "1",
       name: 'Leanne Graham',
       username: 'Bret#@',
       email: 'alter@nov@a@yopmail.com',

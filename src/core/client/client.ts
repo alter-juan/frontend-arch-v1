@@ -1,12 +1,14 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_BASE_URL_ENDPOINT,
 });
 
 client.interceptors.request.use(
   (config) => {
     const token = sessionStorage.getItem("token");
+    const API_KEY = import.meta.env.VITE_BACK_API_KEY;
+    config.headers['x-api-key'] = API_KEY;
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
@@ -31,7 +33,7 @@ client.interceptors.response.use(
       sessionStorage.removeItem("token");
       window.location.reload();
 
-      const { data, status } = await client.post("auth/refresh", {
+      const { data, status } = await client.post("/authentication/refresh/", {
         expiresInMins: 5,
       }); 
       
