@@ -2,7 +2,7 @@ import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { useSurveyInjection } from "../../dependencies/useSurveyInjection";
-import { SurveyWithText } from "../../models";
+import { ISurveyGroupWithSurveyDetail } from "../../models";
 import { EventSubmitCognitoForm } from "../../types";
 
 export function surveyController() {
@@ -12,12 +12,12 @@ export function surveyController() {
   const { surveysQuery } = useSurveyInjection();
 
   const page = ref(route.query.page ? parseInt(route.query.page as string) : 1);
-  const steps = ref<SurveyWithText[]>([]);
+  const steps = ref<ISurveyGroupWithSurveyDetail>();
   const isLoading = ref(false);
 
   const getSurveys = async () => {
     try {
-      const surveys = await surveysQuery.getByUser();
+      const surveys = await surveysQuery.getSurveysBySurveyGroupId("1");
       steps.value = surveys;
     } catch (error) {
       console.error(error);
@@ -31,6 +31,7 @@ export function surveyController() {
       const newPage = page.value + 1;
       page.value = newPage;
       await router.push({ query: { page: newPage } });
+      updateStepCompletion();
     } catch (error) {
       console.error(error);
     } finally {
@@ -38,12 +39,16 @@ export function surveyController() {
     }
   };
 
+  const updateStepCompletion = () => {
+    steps.value?.surveys.forEach((step, index) => {
+      step.isCompleted = index < page.value;
+    });
+  };
+
   onMounted(async () => {
     await getSurveys();
     page.value = route.query.page ? parseInt(route.query.page as string) : 1;
-    steps.value.forEach((step, index) => {
-      step.active = index < page.value;
-    });
+    updateStepCompletion();
   });
 
   return {

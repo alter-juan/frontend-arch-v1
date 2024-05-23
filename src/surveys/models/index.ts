@@ -1,3 +1,4 @@
-import type { SurveyWithText } from "./survey.entity";
+import type { ISurvey } from "./survey.entity";
+import type { ISurveyGroupWithSurveyDetail } from "./surveyGroup.entity";
 
-export { SurveyWithText };
+export { ISurvey,ISurveyGroupWithSurveyDetail };

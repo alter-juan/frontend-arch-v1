@@ -56,7 +56,6 @@ watch(
 
 <style scoped>
 .cognito-form {
-  width: 100%;
   max-width: 850px;
   margin: 0 auto;
   padding: 1rem;

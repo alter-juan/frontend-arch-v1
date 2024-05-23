@@ -1,7 +1,11 @@
-import { SurveyWithText } from "../models";
+import { ISurvey,ISurveyGroupWithSurveyDetail } from "../models";
 import { EventSubmitCognitoForm } from "../types";
 
 export interface SurveysQueryRepository {
-  getByUser(): Promise<SurveyWithText[]>;
+  getByUser(): Promise<ISurvey[]>;
   postSurvey(e: EventSubmitCognitoForm): Promise<EventSubmitCognitoForm>;
+  getSurveysGroup(): Promise<ISurveyGroupWithSurveyDetail[]>;
+  getSurveysBySurveyGroupId(
+    surveyGroupId: string
+  ): Promise<ISurveyGroupWithSurveyDetail>;
 }

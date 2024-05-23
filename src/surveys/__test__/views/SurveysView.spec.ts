@@ -31,10 +31,11 @@ describe("Given a view to surveys", () => {
           },
         },
       });
-      const stepOne = await findByText(/personal information/i);
+
+      const stepOne = await findByText("Personal Information");
       expect(stepOne).toBeTruthy();
 
-      const stepTwo = await findByText(/Details/i);
+      const stepTwo = await findByText("Details");
       expect(stepTwo).toBeTruthy();
     });
     it("then the user should be able to see the form", async () => {

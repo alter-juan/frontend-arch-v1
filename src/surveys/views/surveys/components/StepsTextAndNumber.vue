@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { SurveyWithText } from "../../../models";
+import { ISurvey } from "@/surveys/models";
 
 const props = defineProps<{
-  steps: SurveyWithText[];
+  steps: ISurvey[];
 }>();
 
-const getSurveyClass = (index: number, step: SurveyWithText) => {
+const getSurveyClass = (index: number, step: ISurvey) => {
   const lastIndex = props.steps.length - 1;
   const classes = ["flex", "items-center"];
 
   if (index !== lastIndex) {
     classes.push("md-full");
     classes.push("before-base", "after-base");
-    if (step.active) {
+    if (step.isCompleted) {
       classes.push("text-active");
       classes.push("before-active", "after-active");
     } else {
@@ -24,9 +24,9 @@ const getSurveyClass = (index: number, step: SurveyWithText) => {
   return classes.join(" ");
 };
 
-const getSurveyNumberClass = (step: SurveyWithText) => {
+const getSurveyNumberClass = (step: ISurvey) => {
   const classes = ["common-classes"];
-  if (step.active) {
+  if (step.isCompleted) {
     classes.push("number-active");
   } else {
     classes.push("number-inactive");
@@ -43,8 +43,11 @@ const getSurveyNumberClass = (step: SurveyWithText) => {
       :class="getSurveyClass(index, step)"
     >
       <div class="step-container">
-        <span :class="getSurveyNumberClass(step)">{{ index + 1 }}</span
-        >{{ step.text }}
+        <span 
+          :class="getSurveyNumberClass(step)"
+        >
+          {{ index + 1 }}
+        </span>{{ step.name }}
       </div>
     </li>
   </ol>

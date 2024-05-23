@@ -1,5 +1,7 @@
-export interface SurveyWithText {
+export interface ISurvey {
   id: string;
-  text?: string;
-  active: boolean;
+  name: string;
+  description: string;
+  surveyId: boolean;
+  isCompleted: boolean;
 }

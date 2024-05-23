@@ -10,16 +10,22 @@ const { onSubmit, page, steps, isLoading } = surveyController();
 </script>
 
 <template>
-  <section class="section-form">
-    <StepsTextAndNumber :steps="steps" />
+  <section 
+    v-if="steps" 
+    class="section-form"
+  >
+    <StepsTextAndNumber 
+      v-if="steps?.surveys" 
+      :steps="steps?.surveys" 
+    />
     <p 
-      v-if="isLoading"
+      v-if="isLoading" 
       class="text-success"
     >
       🔔 Thank you for responding to the survey... we are saving the
       information. Wait a moment... 🕒
     </p>
-    <div v-if="page > steps.length && !isLoading">
+    <div v-if="page > steps?.surveys.length && !isLoading">
       <p class="text-center">
         Congratulations you have submitted all the required forms.
       </p>
@@ -31,6 +37,12 @@ const { onSubmit, page, steps, isLoading } = surveyController();
       @after-submit="onSubmit"
     />
   </section>
+  <p 
+    v-if="isLoading" 
+    class="text-success"
+  >
+    Loading...
+  </p>
 </template>
 
 <style scoped>

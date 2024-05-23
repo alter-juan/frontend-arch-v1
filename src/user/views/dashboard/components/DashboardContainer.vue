@@ -13,6 +13,9 @@ const router = useRouter();
 </script>
 <template>
   <UserTitle>Dashboard</UserTitle>
+  <button @click="router.push({ name: 'HomeSurvey' })">
+    Surveys Template
+  </button>
   <ul v-if="users.length">
     <li
       v-for="user in users"

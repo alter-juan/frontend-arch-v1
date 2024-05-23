@@ -1,10 +1,14 @@
-import { SurveyWithText } from "../models";
+import { ISurvey } from "../models/";
+import { ISurveyGroupWithSurveyDetail } from "../models/surveyGroup.entity";
 import { EventSubmitCognitoForm } from "../types";
-import { createFakeSurvey } from "./__mocks__/surveysFetch.query";
+import {
+  createFakeSurvey,
+  createFakeSurveyGroup,
+} from "./__mocks__/surveysFetch.query";
 import { SurveysQueryRepository } from "./surveys.repository";
 
 export class SurveysFetchService implements SurveysQueryRepository {
-  getByUser(): Promise<SurveyWithText[]> {
+  getByUser(): Promise<ISurvey[]> {
     return Promise.resolve([
       createFakeSurvey(),
       createFakeSurvey(),
@@ -19,5 +23,17 @@ export class SurveysFetchService implements SurveysQueryRepository {
       }, 5000);
     });
     return response;
+  }
+
+  getSurveysGroup(): Promise<ISurveyGroupWithSurveyDetail[]> {
+    return Promise.resolve([
+      createFakeSurveyGroup(),
+      createFakeSurveyGroup(),
+      createFakeSurveyGroup(),
+    ]);
+  }
+
+  getSurveysBySurveyGroupId(): Promise<ISurveyGroupWithSurveyDetail> {
+    return Promise.resolve(createFakeSurveyGroup());
   }
 }
