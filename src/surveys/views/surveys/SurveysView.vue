@@ -12,7 +12,10 @@ const { onSubmit, page, steps, isLoading } = surveyController();
 <template>
   <section class="section-form">
     <StepsTextAndNumber :steps="steps" />
-    <p v-if="isLoading" class="text-success">
+    <p 
+      v-if="isLoading"
+      class="text-success"
+    >
       🔔 Thank you for responding to the survey... we are saving the
       information. Wait a moment... 🕒
     </p>
