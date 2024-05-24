@@ -46,11 +46,11 @@ watch(
 </script>
 
 <template>
-  <div 
-    id="cognito" 
+  <div
+    id="cognito"
     ref="cognito"
     data-testid="cognito"
-    class="cognito-form" 
+    class="cognito-form"
   />
 </template>
 

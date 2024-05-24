@@ -17,7 +17,7 @@ const { onSubmit, steps, isLoading, surveySelected, isPageOutOfRange } = surveyC
       :steps="steps?.surveys" 
     />
     <p 
-      v-if="isLoading" 
+      v-if="isLoading && !isPageOutOfRange" 
       class="text-success"
     >
       🔔 Thank you for responding to the survey... we are saving the
@@ -36,7 +36,7 @@ const { onSubmit, steps, isLoading, surveySelected, isPageOutOfRange } = surveyC
     />
   </section>
   <p 
-    v-if="isLoading" 
+    v-if="!steps && isLoading" 
     class="text-success"
   >
     Loading...

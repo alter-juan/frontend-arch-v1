@@ -34,7 +34,8 @@ export function surveyController() {
       const newPage = page.value + 1;
       page.value = newPage;
       await router.push({ query: { page: newPage } });
-      updateStepCompletion();
+      // TODO: I tried to remove this line but at the time of being in the second form and try to go to form #3 did not let, it stays in the #2 with this line if it refreshes, it is not the best option but it serves .... any doubt or solution for this part will be well received for the benefit of the template.
+      window.location.reload();
     } catch (error) {
       console.error(error);
     } finally {
@@ -54,7 +55,7 @@ export function surveyController() {
   });
 
   const isPageOutOfRange = computed(
-    () => page.value - 1 > steps.value!?.surveys.length && !isLoading.value
+    () => page.value === steps.value!?.surveys.length && isLoading.value
   );
 
   onMounted(async () => {
