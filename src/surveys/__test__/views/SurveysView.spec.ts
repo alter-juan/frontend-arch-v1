@@ -18,9 +18,6 @@ vi.mock("vue-router", () => ({
 vi.mock("@/surveys/services/surveysFetch.query.ts");
 
 describe("Given a view to surveys", () => {
-  beforeEach(() => {
-    vi.stubEnv("VITE_API_KEY_FORM", "X1ASX22");
-  });
   describe("When the user is on the surveys page", () => {
     it("then the user should be able to see the steps", async () => {
       const { findByText } = render(SurveysView, {
