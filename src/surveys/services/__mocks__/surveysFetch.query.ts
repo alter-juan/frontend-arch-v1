@@ -54,14 +54,14 @@ export const mockDtoSurveyGroupWithSurvey =
     survey_group_id: FORM_ID_MOCK,
     isCompleted: faker.datatype.boolean(),
     description: faker.lorem.sentence(),
-    surveys: [mockDtoSurvey(), mockDtoSurvey(), mockDtoSurvey()],
+    surveys: [mockDtoSurvey(1), mockDtoSurvey(2), mockDtoSurvey(3)],
   });
 
-export const mockDtoSurvey = (): ISurveyDto => ({
+export const mockDtoSurvey = (surveyId: number): ISurveyDto => ({
   id: faker.number.int().toString(),
   name: "" ?? faker.lorem.sentence(),
   description: faker.lorem.sentence(),
-  survey_id: faker.number.int(),
+  survey_id: surveyId ?? faker.number.int(),
   is_completed: faker.datatype.boolean(),
 });
 

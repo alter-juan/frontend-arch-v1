@@ -37,9 +37,9 @@ const SurveyGroupDetailTranslate = {
 export class SurveysFetchService implements SurveysQueryRepository {
   async getByUser(): Promise<ISurvey[]> {
     const response = await Promise.resolve([
-      mockDtoSurvey(),
-      mockDtoSurvey(),
-      mockDtoSurvey(),
+      mockDtoSurvey(1),
+      mockDtoSurvey(2),
+      mockDtoSurvey(3),
     ]);
     return response.map(SurveyDetailTranslate.toEntity);
   }
