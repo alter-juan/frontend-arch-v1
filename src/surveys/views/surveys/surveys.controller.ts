@@ -9,7 +9,7 @@ export function surveyController() {
   const router = useRouter();
   const route = useRoute();
 
-  const { surveysQuery } = useSurveyInjection();
+  const { surveysQuery, surveyCommand } = useSurveyInjection();
 
   const page = ref(route.query.page ? parseInt(route.query.page as string) : 1);
   const steps = ref<ISurveyGroupWithSurveyDetail>();
@@ -29,8 +29,9 @@ export function surveyController() {
   const onSubmit = async (e: EventSubmitCognitoForm) => {
     isLoading.value = true;
     try {
-      await surveysQuery.postSurvey(e);
-      if(page.value === steps.value?.surveys.length) return router.push({ name: "DashboardLayout" });
+      await surveyCommand.postSurvey(e);
+      if (page.value === steps.value?.surveys.length)
+        return router.push({ name: "DashboardLayout" });
       const newPage = page.value + 1;
       page.value = newPage;
       await router.push({ query: { page: newPage } });
@@ -74,6 +75,6 @@ export function surveyController() {
     onSubmit,
     surveySelected,
     isLoading,
-    isPageOutOfRange
+    isPageOutOfRange,
   };
 }

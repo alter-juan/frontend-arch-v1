@@ -32,7 +32,7 @@ const { onSubmit, steps, isLoading, surveySelected, isPageOutOfRange } = surveyC
       v-else
       :key-form="steps.surveyGroupId"
       :form="surveySelected?.toString()!"
-      @after-submit="onSubmit"
+      @submit-survey-cognito="onSubmit"
     />
   </section>
   <p 

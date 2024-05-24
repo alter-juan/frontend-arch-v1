@@ -9,7 +9,7 @@ const props = defineProps<{
 const cognito = ref<HTMLDivElement | null>(null);
 
 const emits = defineEmits<{
-  (event: "afterSubmit", e: any): void;
+  (event: "submitSurveyCognito", e: any): void;
 }>();
 
 const loadScript = () => {
@@ -27,8 +27,8 @@ const loadScript = () => {
     cognito.value?.appendChild(prefillScript);
 
     // @ts-ignore
-    Cognito.on("afterSubmit", function (e) {
-      emits("afterSubmit", e);
+    Cognito.on("submitSurveyCognito", function (e) {
+      emits("submitSurveyCognito", e);
     });
   };
 

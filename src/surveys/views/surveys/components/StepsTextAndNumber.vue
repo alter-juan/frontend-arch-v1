@@ -7,30 +7,25 @@ const props = defineProps<{
 
 const getSurveyClass = (index: number, step: ISurvey) => {
   const lastIndex = props.steps.length - 1;
-  const classes = ["flex", "items-center"];
+  const isNotLast = index !== lastIndex;
+  const isActive = step.isCompleted;
 
-  if (index !== lastIndex) {
-    classes.push("md-full");
-    classes.push("before-base", "after-base");
-    if (step.isCompleted) {
-      classes.push("text-active");
-      classes.push("before-active", "after-active");
-    } else {
-      classes.push("text-inactive");
+  const classes = [
+    "flex",
+    "items-center",
+    ...(isNotLast ? ["md-full", "before-base", "after-base"] : []),
+    ...(isNotLast && isActive ? ["text-active", "before-active", "after-active"] : []),
+    ...(isNotLast && !isActive ? ["text-inactive", "before-inactive", "after-inactive"] : [])
+  ];
 
-      classes.push("before-inactive", "after-inactive");
-    }
-  }
   return classes.join(" ");
 };
 
 const getSurveyNumberClass = (step: ISurvey) => {
   const classes = ["common-classes"];
-  if (step.isCompleted) {
-    classes.push("number-active");
-  } else {
-    classes.push("number-inactive");
-  }
+  const numberState = step.isCompleted ? "number-active" : "number-inactive";
+  classes.push(numberState);
+
   return classes.join(" ");
 };
 </script>

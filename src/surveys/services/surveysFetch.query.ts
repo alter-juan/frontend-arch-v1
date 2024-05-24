@@ -2,7 +2,6 @@ import { ISurveyDto } from "../models/dto/survey.dto";
 import { ISurveyGroupWithSurveyDetailDto } from "../models/dto/surveyGroup.dto";
 import { ISurvey } from "../models/entity";
 import { ISurveyGroupWithSurveyDetail } from "../models/entity/surveyGroup.entity";
-import { EventSubmitCognitoForm } from "../types";
 import {
   mockDtoSurvey,
   mockDtoSurveyGroupWithSurvey,
@@ -42,15 +41,6 @@ export class SurveysFetchService implements SurveysQueryRepository {
       mockDtoSurvey(3),
     ]);
     return response.map(SurveyDetailTranslate.toEntity);
-  }
-
-  postSurvey(e: EventSubmitCognitoForm): Promise<EventSubmitCognitoForm> {
-    const response = new Promise<EventSubmitCognitoForm>((resolve) => {
-      setTimeout(() => {
-        resolve(e);
-      }, 5000);
-    });
-    return response;
   }
 
   async getSurveysGroup(): Promise<ISurveyGroupWithSurveyDetail[]> {
