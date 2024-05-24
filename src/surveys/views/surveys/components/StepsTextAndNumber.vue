@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ISurvey } from "@/surveys/models";
+import { ISurvey } from "@/surveys/models/entity";
 
 const props = defineProps<{
   steps: ISurvey[];

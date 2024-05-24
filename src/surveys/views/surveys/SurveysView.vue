@@ -4,9 +4,7 @@ import { surveyController } from "./surveys.controller";
 import StepsTextAndNumber from "../surveys/components/StepsTextAndNumber.vue";
 import FormCognito from "./components/FormCognito.vue";
 
-const KEY_FORM = import.meta.env.VITE_API_KEY_FORM as string;
-
-const { onSubmit, page, steps, isLoading } = surveyController();
+const { onSubmit, steps, isLoading, surveySelected, isPageOutOfRange } = surveyController();
 </script>
 
 <template>
@@ -25,15 +23,15 @@ const { onSubmit, page, steps, isLoading } = surveyController();
       🔔 Thank you for responding to the survey... we are saving the
       information. Wait a moment... 🕒
     </p>
-    <div v-if="page > steps?.surveys.length && !isLoading">
+    <div v-if="isPageOutOfRange">
       <p class="text-center">
         Congratulations you have submitted all the required forms.
       </p>
     </div>
     <FormCognito
       v-else
-      :key-form="KEY_FORM"
-      :form="page?.toString()"
+      :key-form="steps.surveyGroupId"
+      :form="surveySelected?.toString()!"
       @after-submit="onSubmit"
     />
   </section>

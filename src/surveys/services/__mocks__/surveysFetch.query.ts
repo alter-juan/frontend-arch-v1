@@ -1,16 +1,29 @@
 import { faker } from "@faker-js/faker";
 
-import { ISurvey } from "@/surveys/models";
-import { ISurveyGroupWithSurveyDetail } from "../../models";
+import { ISurveyDto } from "@/surveys/models/dto/survey.dto";
+import { ISurveyGroupWithSurveyDetailDto } from "@/surveys/models/dto/surveyGroup.dto";
+import { ISurvey } from "@/surveys/models/entity";
+import { ISurveyGroupWithSurveyDetail } from "../../models/entity";
 import { EventSubmitCognitoForm } from "../../types";
 import { SurveysQueryRepository } from "../surveys.repository";
+
+export const FORM_ID_MOCK = "vUM6bewWfU2gozW7YQwrMQ";
 
 export class SurveysFetchService implements SurveysQueryRepository {
   getByUser(): Promise<ISurvey[]> {
     return Promise.resolve([
-      createFakeSurvey("Personal Information"),
-      createFakeSurvey("Details"),
-      createFakeSurvey("Payment"),
+      createFakeSurvey({
+        name: "Personal Information",
+        surveyId: 1,
+      }),
+      createFakeSurvey({
+        name: "Details",
+        surveyId: 2,
+      }),
+      createFakeSurvey({
+        name: "Payment",
+        surveyId: 3,
+      }),
     ]);
   }
 
@@ -24,42 +37,68 @@ export class SurveysFetchService implements SurveysQueryRepository {
   }
 
   getSurveysGroup(): Promise<ISurveyGroupWithSurveyDetail[]> {
-    return Promise.resolve([createFakeSurveyGroup("Personal Information")]);
+    return Promise.resolve([createFakeSurveyGroup()]);
   }
 
   getSurveysBySurveyGroupId(
     surveyGroupId: string
   ): Promise<ISurveyGroupWithSurveyDetail> {
-    return Promise.resolve({
-      id: faker.number.int().toString() + surveyGroupId,
-      name: faker.lorem.sentence(),
-      surveyGroupId: faker.number.int().toString(),
-      isCompleted: faker.datatype.boolean(),
-      description: faker.lorem.sentence(),
-      surveys: [
-        createFakeSurvey("Personal Information"),
-        createFakeSurvey("Details"),
-        createFakeSurvey("Payment"),
-      ],
-    });
+    return Promise.resolve(createFakeSurveyGroup(surveyGroupId));
   }
 }
 
-export const createFakeSurvey = (text?: string): ISurvey => ({
+export const mockDtoSurveyGroupWithSurvey =
+  (): ISurveyGroupWithSurveyDetailDto => ({
+    id: faker.number.int().toString(),
+    name: faker.lorem.sentence(),
+    survey_group_id: FORM_ID_MOCK,
+    isCompleted: faker.datatype.boolean(),
+    description: faker.lorem.sentence(),
+    surveys: [mockDtoSurvey(), mockDtoSurvey(), mockDtoSurvey()],
+  });
+
+export const mockDtoSurvey = (): ISurveyDto => ({
   id: faker.number.int().toString(),
-  name: text ?? '',
+  name: "" ?? faker.lorem.sentence(),
   description: faker.lorem.sentence(),
-  surveyId: faker.datatype.boolean(),
+  survey_id: faker.number.int(),
+  is_completed: faker.datatype.boolean(),
+});
+
+export const createFakeSurvey = ({
+  name = "",
+  surveyId = 1,
+}: {
+  name?: string;
+  surveyId: number;
+}): ISurvey => ({
+  id: faker.number.int().toString(),
+  name: name ?? "",
+  description: faker.lorem.sentence(),
+  surveyId: surveyId ?? faker.number.int(),
   isCompleted: faker.datatype.boolean(),
 });
 
 export const createFakeSurveyGroup = (
-  name?: string
+  surveyId?: string
 ): ISurveyGroupWithSurveyDetail => ({
   id: faker.number.int().toString(),
-  name: name || faker.lorem.sentence(),
-  surveyGroupId: faker.number.int().toString(),
+  name: faker.lorem.sentence(),
+  surveyGroupId: surveyId ?? FORM_ID_MOCK,
   isCompleted: faker.datatype.boolean(),
   description: faker.lorem.sentence(),
-  surveys: [createFakeSurvey(""), createFakeSurvey(""), createFakeSurvey("")],
+  surveys: [
+    createFakeSurvey({
+      name: "Personal Information",
+      surveyId: 1,
+    }),
+    createFakeSurvey({
+      name: "Details",
+      surveyId: 2,
+    }),
+    createFakeSurvey({
+      name: "Payment",
+      surveyId: 3,
+    }),
+  ],
 });

@@ -1,4 +1,4 @@
-import { ISurvey,ISurveyGroupWithSurveyDetail } from "../models";
+import { ISurvey,ISurveyGroupWithSurveyDetail } from "../models/entity";
 import { EventSubmitCognitoForm } from "../types";
 
 export interface SurveysQueryRepository {

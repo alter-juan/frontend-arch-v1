@@ -1,19 +1,47 @@
-import { ISurvey } from "../models/";
-import { ISurveyGroupWithSurveyDetail } from "../models/surveyGroup.entity";
+import { ISurveyDto } from "../models/dto/survey.dto";
+import { ISurveyGroupWithSurveyDetailDto } from "../models/dto/surveyGroup.dto";
+import { ISurvey } from "../models/entity";
+import { ISurveyGroupWithSurveyDetail } from "../models/entity/surveyGroup.entity";
 import { EventSubmitCognitoForm } from "../types";
 import {
-  createFakeSurvey,
-  createFakeSurveyGroup,
+  mockDtoSurvey,
+  mockDtoSurveyGroupWithSurvey,
 } from "./__mocks__/surveysFetch.query";
 import { SurveysQueryRepository } from "./surveys.repository";
 
+const SurveyDetailTranslate = {
+  toEntity(dto: ISurveyDto): ISurvey {
+    return {
+      id: dto.id,
+      name: dto.name,
+      surveyId: dto.survey_id,
+      isCompleted: dto.is_completed,
+      description: dto.description,
+    };
+  },
+};
+
+const SurveyGroupDetailTranslate = {
+  toEntity(dto: ISurveyGroupWithSurveyDetailDto): ISurveyGroupWithSurveyDetail {
+    return {
+      id: dto.id,
+      name: dto.name,
+      surveyGroupId: dto.survey_group_id,
+      isCompleted: dto.isCompleted,
+      description: dto.description,
+      surveys: dto.surveys.map(SurveyDetailTranslate.toEntity),
+    };
+  },
+};
+
 export class SurveysFetchService implements SurveysQueryRepository {
-  getByUser(): Promise<ISurvey[]> {
-    return Promise.resolve([
-      createFakeSurvey(),
-      createFakeSurvey(),
-      createFakeSurvey(),
+  async getByUser(): Promise<ISurvey[]> {
+    const response = await Promise.resolve([
+      mockDtoSurvey(),
+      mockDtoSurvey(),
+      mockDtoSurvey(),
     ]);
+    return response.map(SurveyDetailTranslate.toEntity);
   }
 
   postSurvey(e: EventSubmitCognitoForm): Promise<EventSubmitCognitoForm> {
@@ -25,15 +53,20 @@ export class SurveysFetchService implements SurveysQueryRepository {
     return response;
   }
 
-  getSurveysGroup(): Promise<ISurveyGroupWithSurveyDetail[]> {
-    return Promise.resolve([
-      createFakeSurveyGroup(),
-      createFakeSurveyGroup(),
-      createFakeSurveyGroup(),
+  async getSurveysGroup(): Promise<ISurveyGroupWithSurveyDetail[]> {
+    const response = await Promise.resolve([
+      mockDtoSurveyGroupWithSurvey(),
+      mockDtoSurveyGroupWithSurvey(),
+      mockDtoSurveyGroupWithSurvey(),
     ]);
+
+    return response.map((surveyGroup) =>
+      SurveyGroupDetailTranslate.toEntity(surveyGroup)
+    );
   }
 
-  getSurveysBySurveyGroupId(): Promise<ISurveyGroupWithSurveyDetail> {
-    return Promise.resolve(createFakeSurveyGroup());
+  async getSurveysBySurveyGroupId(): Promise<ISurveyGroupWithSurveyDetail> {
+    const response = await Promise.resolve(mockDtoSurveyGroupWithSurvey());
+    return SurveyGroupDetailTranslate.toEntity(response);
   }
 }
